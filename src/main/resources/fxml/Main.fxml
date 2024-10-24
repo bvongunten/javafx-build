@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="127.0" prefWidth="241.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ch.nostromo.fxhelloworld.fxui.MainController">
+   <children>
+      <Label layoutX="34.0" layoutY="40.0" prefHeight="17.0" prefWidth="91.0" text="Hello World :)" />
+      <Button layoutX="34.0" layoutY="71.0" mnemonicParsing="false" onAction="#onQuit" prefHeight="25.0" prefWidth="149.0" text="Quit" />
+   </children>
+</Pane>

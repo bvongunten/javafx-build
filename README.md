@@ -1,2 +1,2 @@
 # javafx-build
-Build examples java fx
+Build examples for java fx
