@@ -8,7 +8,7 @@ Set-Variable -Name WORKINGDIR -Value "target"
 Set-Variable -Name SOURCEDIR -Value "../../"
 
 Set-Variable -Name PROJECT_NAME -Value FxHelloWorld
-Set-Variable -Name ARTIFACT_VERSION -Value "1.0-SNAPSHOT"
+Set-Variable -Name ARTIFACT_VERSION -Value "1.0.0"
 Set-Variable -Name PUBLICVERSION -Value "1.0"
 Set-Variable -Name MAINMODULE -Value fxhelloworld
 Set-Variable -Name MAINCLASS -Value ch.nostromo.fxhelloworld.FxHelloWorld
