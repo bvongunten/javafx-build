@@ -18,8 +18,8 @@ ARTIFACT=ch/nostromo/fxhelloworld/1.0.0/fxhelloworld-1.0.0.jar
 MAIN_CLASS=ch.nostromo.fxhelloworld.FxHelloWorld
 MAIN_MODULE=fxhelloworld
 
-VERSION=1.0.0
-PROJECT_NAME="FXHelloWorld"
+PUBLIC_VERSION=1.0.0
+PUBLIC_NAME="FXHelloWorld"
 VENDOR="Bernhard von Gunten"
 COPYRIGHT="Copyright (c) 2024 Bernhard von Gunten"
 IDENTIFIER=ch.nostromo.fxhelloworld
@@ -50,18 +50,18 @@ jlink \
   --module-path $MODPATH  \
   --add-modules $MAIN_MODULE  \
   --add-modules jdk.crypto.ec  \
-  --launcher $PROJECT_NAME=$MAIN_MODULE/$MAIN_CLASS  \
+  --launcher $PUBLIC_NAME=$MAIN_MODULE/$MAIN_CLASS  \
   --output $WORKINGDIR/app-vmimage
 
 echo Creating Application ...
 jpackage \
   --type app-image \
   --dest $WORKINGDIR \
-  --name $PROJECT_NAME \
+  --name $PUBLIC_NAME \
   --vendor "\$VENDOR" \
   --module $MAIN_MODULE/$MAIN_CLASS \
   --icon $ICON \
-  --app-version $VERSION \
+  --app-version $PUBLIC_VERSION \
   --runtime-image $WORKINGDIR/app-vmimage \
   --mac-sign \
   --mac-entitlements $ENTITLEMENTS \
@@ -75,22 +75,22 @@ codesign \
     --options runtime \
     --force \
     --sign "$APPLE_DEV_SIGNING_KEY" \
-    $WORKINGDIR/$PROJECT_NAME.app
+    $WORKINGDIR/$PUBLIC_NAME.app
 
 echo Create DMG ...
 jpackage \
   --type dmg \
   --dest $WORKINGDIR \
-  --name $PROJECT_NAME \
-  --app-image $WORKINGDIR/$PROJECT_NAME.app \
+  --name $PUBLIC_NAME \
+  --app-image $WORKINGDIR/$PUBLIC_NAME.app \
   --icon $ICON \
   --mac-sign \
   --mac-signing-key-user-name "$APPLE_DEV_SIGNING_KEY" \
   --mac-package-identifier $IDENTIFIER \
-  --mac-package-name $PROJECT_NAME \
+  --mac-package-name $PUBLIC_NAME \
   --mac-entitlements $ENTITLEMENTS \
   --vendor "$VENDOR" \
-  --app-version $VERSION \
+  --app-version $PUBLIC_VERSION \
   --copyright "\$COPYRIGHT"
 
 echo Notarize ...
@@ -100,7 +100,7 @@ xcrun \
   --apple-id $APPLE_DEV_ID \
   --team-id $APPLE_DEV_TEAM_ID \
   --password $APPLE_DEV_APP_PASSWORD \
-  $WORKINGDIR/$PROJECT_NAME-$VERSION.dmg \
+  $WORKINGDIR/$PUBLIC_NAME-$PUBLIC_VERSION.dmg \
   --wait
 
 echo Staple ...
@@ -108,4 +108,4 @@ echo Staple ...
 xcrun \
   stapler \
   staple \
-  $WORKINGDIR/$PROJECT_NAME-$VERSION.dmg
+  $WORKINGDIR/$PUBLIC_NAME-$PUBLIC_VERSION.dmg
