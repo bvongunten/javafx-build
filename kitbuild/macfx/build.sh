@@ -14,21 +14,21 @@ WORKINGDIR=target
 SOURCEDIR=../../
 
 
-ARTIFACT_ID=fxhelloworld
-ARTIFACT_VERSION=1.0.0
-IDENTIFIER=ch.nostromo.fxhelloworld
-MAINCLASS=ch.nostromo.fxhelloworld.FxHelloWorld
-MAINMODULE=fxhelloworld
+ARTIFACT=ch/nostromo/fxhelloworld/1.0.0/fxhelloworld-1.0.0.jar
+MAIN_CLASS=ch.nostromo.fxhelloworld.FxHelloWorld
+MAIN_MODULE=fxhelloworld
 
 VERSION=1.0.0
 PROJECT_NAME="FXHelloWorld"
 VENDOR="Bernhard von Gunten"
 COPYRIGHT="Copyright (c) 2024 Bernhard von Gunten"
+IDENTIFIER=ch.nostromo.fxhelloworld
 ICON=$SOURCEDIR/src/main/deploy/osx/FxGui.icns
 ENTITLEMENTS=$SOURCEDIR/src/main/deploy/osx/FxGui.entitlements
 
+
 EXTERNAL_MODULES=(
-  "$REPO/ch/nostromo/$ARTIFACT_ID/$ARTIFACT_VERSION/$ARTIFACT_ID-$ARTIFACT_VERSION.jar"
+  "$REPO/$ARTIFACT"
   "$REPO/org/openjfx/javafx-base/17.0.13/javafx-base-17.0.13-mac-aarch64.jar"
   "$REPO/org/openjfx/javafx-controls/17.0.13/javafx-controls-17.0.13-mac-aarch64.jar"
   "$REPO/org/openjfx/javafx-fxml/17.0.13/javafx-fxml-17.0.13-mac-aarch64.jar"
@@ -48,9 +48,9 @@ rm -rf $WORKINGDIR
 echo Running jlink ...
 jlink \
   --module-path $MODPATH  \
-  --add-modules $MAINMODULE  \
+  --add-modules $MAIN_MODULE  \
   --add-modules jdk.crypto.ec  \
-  --launcher $PROJECT_NAME=$MAINMODULE/$MAINCLASS  \
+  --launcher $PROJECT_NAME=$MAIN_MODULE/$MAIN_CLASS  \
   --output $WORKINGDIR/app-vmimage
 
 echo Creating Application ...
@@ -59,7 +59,7 @@ jpackage \
   --dest $WORKINGDIR \
   --name $PROJECT_NAME \
   --vendor "\$VENDOR" \
-  --module $MAINMODULE/$MAINCLASS \
+  --module $MAIN_MODULE/$MAIN_CLASS \
   --icon $ICON \
   --app-version $VERSION \
   --runtime-image $WORKINGDIR/app-vmimage \
